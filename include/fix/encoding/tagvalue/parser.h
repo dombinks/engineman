@@ -10,13 +10,13 @@
 
 namespace tagvalue
 {
-  typedef struct pair
+  typedef struct field
   {
     int tag;
     std::string value;
-  } pair;
+  } field;
 
-  std::vector<pair> parse(std::string);
+  std::vector<field> parse(std::string);
 }
 
 #endif //ENGINEMAN_PARSER_H

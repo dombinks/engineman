@@ -8,18 +8,28 @@
 
 int main()
 {
-  std::string in = "3=3";
-  in.push_back('\01');
-  in.append("2=2");
-  in.push_back('\01');
-  in.append("1=1");
-  in.push_back('\01');
+  std::string in = "3=C";
+  in.push_back('\x01');
+  in.append("2=B");
+  in.push_back('\x01');
+  in.append("1=A");
+  in.push_back('\x01');
+  in.append("1.0=A");
+  in.push_back('\x01');
+  in.append("01=A");
+  in.push_back('\x01');
+  in.append("0=");
+  in.push_back('\x01');
+  in.append("=Z");
+  in.push_back('\x01');
+  in.append("=");
+  in.push_back('\x01');
+  in.push_back('\x01');
+  const std::vector<tagvalue::field> out = tagvalue::parse(in);
 
-  const std::vector<tagvalue::pair> out = tagvalue::parse(in);
-
-  for (tagvalue::pair p : out)
+  for (const tagvalue::field& f : out)
   {
-    std::cout << p.tag << " " << p.value << std::endl;
+    std::cout << f.tag << " " << f.value << std::endl;
   }
 
   return 0;
